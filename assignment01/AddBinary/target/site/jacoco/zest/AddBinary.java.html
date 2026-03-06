@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddBinary.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddBinary-test</a> &gt; <a href="index.source.html" class="el_package">zest</a> &gt; <span class="el_source">AddBinary.java</span></div><h1>AddBinary.java</h1><pre class="source lang-java linenums">package zest;
+
+<span class="nc" id="L3">public class AddBinary {</span>
+
+    /**
+     * Adds two binary strings and returns the result as a binary string.
+     *
+     * @param a first binary string
+     * @param b second binary string
+     * @return binary sum of a and b
+     * @throws IllegalArgumentException if a or b is null
+     */
+    public static String addBinary(String a, String b) {
+<span class="fc bfc" id="L14" title="All 8 branches covered.">        if (a == null || b == null ||a.isEmpty() || b.isEmpty()) {</span>
+<span class="fc" id="L15">            throw new IllegalArgumentException(&quot;Input strings cannot be null or empty&quot;);</span>
+        }
+
+<span class="fc bfc" id="L18" title="All 4 branches covered.">        if(a.length() &gt; 10000 || b.length() &gt; 10000) {</span>
+<span class="fc" id="L19">            throw new IllegalArgumentException(&quot;Input strings cannot be longer than 10^4 characters&quot;);</span>
+        }
+        
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for(char c : a.toCharArray()) {</span>
+<span class="fc bfc" id="L23" title="All 4 branches covered.">            if (c != '0' &amp;&amp; c != '1') {</span>
+<span class="fc" id="L24">                throw new IllegalArgumentException(&quot;Input string a contains non-binary character&quot;);</span>
+            }
+        }
+
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for(char c : b.toCharArray()) {</span>
+<span class="fc bfc" id="L29" title="All 4 branches covered.">            if (c != '0' &amp;&amp; c != '1') {</span>
+<span class="fc" id="L30">                throw new IllegalArgumentException(&quot;Input string b contains non-binary character&quot;);</span>
+            }
+        }
+
+<span class="fc bfc" id="L34" title="All 4 branches covered.">        if(a.startsWith(&quot;0&quot;) &amp;&amp; !a.equals(&quot;0&quot;)) {</span>
+<span class="fc" id="L35">            throw new IllegalArgumentException(&quot;Input string a has leading zeros&quot;);</span>
+        }
+
+<span class="fc bfc" id="L38" title="All 4 branches covered.">        if(b.startsWith(&quot;0&quot;) &amp;&amp; !b.equals(&quot;0&quot;)) {</span>
+<span class="fc" id="L39">            throw new IllegalArgumentException(&quot;Input string b has leading zeros&quot;);</span>
+        }
+
+<span class="fc" id="L42">        StringBuilder result = new StringBuilder();</span>
+<span class="fc" id="L43">        int i = a.length() - 1;</span>
+<span class="fc" id="L44">        int j = b.length() - 1;</span>
+<span class="fc" id="L45">        int carry = 0;</span>
+
+<span class="fc bfc" id="L47" title="All 4 branches covered.">        while (i &gt;= 0 || j &gt;= 0) {</span>
+
+<span class="fc" id="L49">            int sum = carry;</span>
+
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            if (i &gt;= 0) {</span>
+<span class="fc" id="L52">                sum += a.charAt(i) - '0';</span>
+<span class="fc" id="L53">                i--;</span>
+            }
+
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (j &gt;= 0) {</span>
+<span class="fc" id="L57">                sum += b.charAt(j) - '0';</span>
+<span class="fc" id="L58">                j--;</span>
+            }
+
+<span class="fc" id="L61">            result.append(sum % 2);</span>
+<span class="fc" id="L62">            carry = sum / 2;</span>
+        }
+
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if (carry != 0) {</span>
+<span class="fc" id="L66">            result.append(carry);</span>
+        }
+
+<span class="fc" id="L69">        return result.reverse().toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
