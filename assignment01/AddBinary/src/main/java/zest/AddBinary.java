@@ -11,8 +11,32 @@ public class AddBinary {
      * @throws IllegalArgumentException if a or b is null
      */
     public static String addBinary(String a, String b) {
-        if (a == null || b == null) {
-            throw new IllegalArgumentException("Input strings cannot be null");
+        if (a == null || b == null ||a.isEmpty() || b.isEmpty()) {
+            throw new IllegalArgumentException("Input strings cannot be null or empty");
+        }
+
+        if(a.length() > 10000 || b.length() > 10000) {
+            throw new IllegalArgumentException("Input strings cannot be longer than 10^4 characters");
+        }
+        
+        for(char c : a.toCharArray()) {
+            if (c != '0' && c != '1') {
+                throw new IllegalArgumentException("Input string a contains non-binary character");
+            }
+        }
+
+        for(char c : b.toCharArray()) {
+            if (c != '0' && c != '1') {
+                throw new IllegalArgumentException("Input string b contains non-binary character");
+            }
+        }
+
+        if(a.startsWith("0") && !a.equals("0")) {
+            throw new IllegalArgumentException("Input string a has leading zeros");
+        }
+
+        if(b.startsWith("0") && !b.equals("0")) {
+            throw new IllegalArgumentException("Input string b has leading zeros");
         }
 
         StringBuilder result = new StringBuilder();
@@ -36,6 +60,10 @@ public class AddBinary {
 
             result.append(sum % 2);
             carry = sum / 2;
+        }
+
+        if (carry != 0) {
+            result.append(carry);
         }
 
         return result.reverse().toString();
