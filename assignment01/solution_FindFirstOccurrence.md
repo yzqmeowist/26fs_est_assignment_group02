@@ -12,6 +12,7 @@
     * The haystack equals with the needle.
     * The haystack and needle have the minimum length 1.
     * The needle occurs for multiple times so that the first occurrence should be returned.
+    * The haystack and needle are both null, or one of them is null.
 * Test techniques
   * Equivalence Partitioning
   * Boundary Value Analysis
