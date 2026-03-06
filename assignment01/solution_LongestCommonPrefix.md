@@ -21,7 +21,7 @@ The report from Jacoco is as below:
 |-------------------------------|---------------------|------|-----------------|------|--------|------|--------|-------|--------|---------|
 | LongestCommonPrefix()         | 3                   | 0%   | n/a             | n/a  | 1      | 1    | 1      | 1     | 1      | 1       |
 | longestCommonPrefix(String[]) | 42/46               | 91%  | 8/10            | 80%  | 2      | 6    | 2      | 11    | 0      | 1       |
-| Total                         | 7 of 49             | 85%  | 2 of 10         | 100% | 3      | 7    | 3      | 12    | 1      | 2       |
+| Total                         | 7 of 49             | 85%  | 2 of 10         | 80%  | 3      | 7    | 3      | 12    | 1      | 2       |
 
 The test does not have 100% line coverage as there is no class instantiation.
 
