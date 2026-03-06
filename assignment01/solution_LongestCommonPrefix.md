@@ -4,6 +4,7 @@
     * The shared starting substring can be found.
     * The shared starting substring cannot be found.
     * The boundary value
+      * The array is null.
       * The group contains only one string.
       * The group contains empty strings.
       * The group contains strings that are identical.
@@ -19,7 +20,7 @@ The report from Jacoco is as below:
 | Element                       | Missed Instructions | Cov. | Missed Branches | Cov. | Missed | Cxty | Missed | Lines | Missed | Methods |
 |-------------------------------|---------------------|------|-----------------|------|--------|------|--------|-------|--------|---------|
 | LongestCommonPrefix()         | 3                   | 0%   | n/a             | n/a  | 1      | 1    | 1      | 1     | 1      | 1       |
-| longestCommonPrefix(String[]) | 4/42                | 91%  | 2/8             | 80%  | 2      | 6    | 2      | 11    | 0      | 1       |
+| longestCommonPrefix(String[]) | 42/46               | 91%  | 8/10            | 80%  | 2      | 6    | 2      | 11    | 0      | 1       |
 | Total                         | 7 of 49             | 85%  | 2 of 10         | 100% | 3      | 7    | 3      | 12    | 1      | 2       |
 
 The test does not have 100% line coverage as there is no class instantiation.
@@ -53,7 +54,7 @@ To fix it, we remove the empty check of `prefix` and get a new report from Jacoc
 | Element                       | Missed Instructions | Cov. | Missed Branches | Cov. | Missed | Cxty | Missed | Lines | Missed | Methods |
 |-------------------------------|---------------------|------|-----------------|------|--------|------|--------|-------|--------|---------|
 | LongestCommonPrefix()         | 3                   | 0%   | n/a             | n/a  | 1      | 1    | 1      | 1     | 1      | 1       |
-| longestCommonPrefix(String[]) | 0/36                | 100% | 0/6             | 100% | 0      | 4    | 0      | 7     | 0      | 1       |
+| longestCommonPrefix(String[]) | 36/36               | 100% | 6/6             | 100% | 0      | 4    | 0      | 7     | 0      | 1       |
 | Total                         | 3 of 39             | 92%  | 0 of 6          | 100% | 1      | 5    | 1      | 8     | 1      | 2       |
 
 The branch and statement coverage are all 100%. No extra test added.
