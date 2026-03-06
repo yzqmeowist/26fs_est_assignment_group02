@@ -31,7 +31,7 @@ public class LengthOfLastWordTest {
                 of("how are you", 3),
 
                 /* 2. boundary value */
-                // single world
+                // single word
                 of("great", 5),
 
                 // trailing spaces

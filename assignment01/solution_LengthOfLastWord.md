@@ -23,7 +23,7 @@ The report from Jacoco is as below:
 |--------------------------|---------------------|------|-----------------|------|--------|------|--------|-------|--------|---------|
 | LengthOfLastWord()       | 3                   | 0%   | n/a             | n/a  | 1      | 1    | 1      | 1     | 1      | 1       |
 | lengthOfLastWord(String) | 35/35               | 100% | 9/10            | 90%  | 1      | 6    | 0      | 10    | 0      | 1       |
-| Total                    | 3 of 38             | 92%  | 1 of 10         | 100% | 2      | 7    | 1      | 11    | 1      | 2       |
+| Total                    | 3 of 38             | 92%  | 1 of 10         | 90%  | 2      | 7    | 1      | 11    | 1      | 2       |
 
 The test does not have 100% line coverage as there is no class instantiation. 
 
