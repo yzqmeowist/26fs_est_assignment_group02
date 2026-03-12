@@ -21,7 +21,7 @@ public class ValidPerfectSquare {
         long left = 1;
         long right = num;
 
-        while (left < right) {
+        while (left <= right) {
             long mid = left + (right - left) / 2;
             long square = mid * mid;
 
