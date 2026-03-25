@@ -15,17 +15,19 @@ public class LongestCommonPrefix {
             throw new IllegalArgumentException("Input array cannot be null");
         }
 
-        if (strs.length == 0) {
-            return "";
-        }
+        // FIX: remove the empty check of strs
+//       if (strs.length == 0) {
+//           return "";
+//       }
 
         String prefix = strs[0];
 
         for (int i = 1; i < strs.length; i++) {
             while (!strs[i].startsWith(prefix)) {
-                if (prefix.isEmpty()) {
-                    return "";
-                }
+                // FIX: remove the empty check of prefix
+//                if (prefix.isEmpty()) {
+//                    return "";
+//                }
                 prefix = prefix.substring(0, prefix.length() - 1);
             }
         }

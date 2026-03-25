@@ -17,7 +17,8 @@ public class MoveZeroes {
         int insertPosition = 0;
 
         // First pass: move all non-zero elements forward
-        for (int i = 0; i < numbers.length-1; i++) {
+        // FIX: change the upper bound to numbers.length
+        for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] != 0) {
                 numbers[insertPosition] = numbers[i];
                 insertPosition++;
