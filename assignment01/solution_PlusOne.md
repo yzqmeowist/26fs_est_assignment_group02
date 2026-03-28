@@ -7,7 +7,10 @@
     * Increment where carry propagates through multiple digits.
     * Increment where all digits are 9, producing an additional digit.
     * Single-digit inputs.
-    * Numbers containing internal zeroes.
+    * Numbers containing internal zeroes. 
+    * Invalid inputs:
+        * `digits == null`
+        * `digits.length == 0`
     * The boundary values
       * Array length:
           * lower boundary: `digits.length == 1`
@@ -42,34 +45,30 @@ array size when incrementing a number consisting entirely of 9s.
 ## Structural Testing
 The report from Jacoco is as below:
 
-| Element           | Class Coverage | Method Coverage | Line Coverage | Branch Coverage |
-|-------------------|----------------|-----------------|---------------|-----------------|
-| `PlusOne`         | 100% (1/1)     | 100% (1/1)      | 90% (9/10)    | 75% (6/8)       |
+| Element   | Class Coverage | Method Coverage | Line Coverage | Branch Coverage |
+|-----------|----------------|-----------------|---------------|-----------------|
+| `PlusOne` | 100% (1/1)     | 100% (1/1)      | 100% (10/10)  | 100% (8/8)      |
 
-The tests cover the main logic of the algorithm completely, including:
-* increment without carry,
-* increment with carry on the last digit, 
-* carry propagation across multiple digits, 
-* and the case where all digits are 9.
-
-The uncovered line and missing branches come from the defensive input validation:
+The initial specification-based tests covered the main increment logic, but missed the
+defensive input validation branch:
 
 `if (digits == null || digits.length == 0)`
 
-These cases were not tested because they are outside the problem specification, which only allows valid arrays with `1 ≤ digits.length ≤ 100`.
+To improve structural coverage, two additional tests were added:
+* `testNullInput`
+* `testEmptyInput`
 
-Therefore, no additional tests were added during structural testing.
+These tests cover the exceptional behavior of the method and exercise the missing line 
+and branches. After adding them, the test suite achieves full line and branch coverage 
+for this class.
 
 ## Mutation Testing
 The report from Pit Test is as below:
 
 | Number of Classes | Line Coverage | Mutation Coverage | Test Strength |
 |-------------------|---------------|-------------------|---------------|
-| 1                 | 82% (9/11)    | 100% (11/11)      | 100% (11/11)  |
+| 1                 | 91% (10/11)   | 100% (11/11)      | 100% (11/11)  |
 
-All mutants were killed by the tests, giving a mutation coverage of 100%.
-This shows that the test suite can detect incorrect behavior.
-
-Line coverage is below 100% because the defensive check for `null`
-or empty arrays is not tested. These cases are outside the problem
-specification (`1 ≤ digits.length ≤ 100`).
+Although PIT does not report full line coverage, all mutants were killed. 
+Therefore, mutation testing did not reveal any weakness in the test suite, 
+so no additional tests were necessary.

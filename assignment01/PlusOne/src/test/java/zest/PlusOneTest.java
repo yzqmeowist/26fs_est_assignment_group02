@@ -62,8 +62,25 @@ public class PlusOneTest {
         assertArrayEquals(expected, PlusOne.plusOne(input));
     }
 
+    @Test
+    public void testNullInput() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PlusOne.plusOne(null)
+        );
 
+        assertEquals("Input array cannot be null or empty", exception.getMessage());
+    }
 
+    @Test
+    public void testEmptyInput() {
+        int[] input = {};
 
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PlusOne.plusOne(input)
+        );
 
+        assertEquals("Input array cannot be null or empty", exception.getMessage());
+    }
 }
