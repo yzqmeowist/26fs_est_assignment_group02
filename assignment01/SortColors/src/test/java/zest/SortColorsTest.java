@@ -96,5 +96,15 @@ public class SortColorsTest {
         );
     }
 
+    @Test
+    public void testNullInput() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> SortColors.sortColors(null)
+        );
+
+        assertEquals("Input array cannot be null", exception.getMessage());
+    }
+
 
 }
