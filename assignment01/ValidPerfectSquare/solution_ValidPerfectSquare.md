@@ -50,25 +50,30 @@ The tests cover the main logic of the algorithm, including:
 * and values near the upper boundary of the input range.
 
 Line and branch coverage are slightly below 100% because the exception
-case (`num <= 0`) is not triggered by the tests. This case is outside
-the problem specification, which guarantees a positive integer input.
+case (`num <= 0`) is not triggered by the tests. 
 
-Therefore, no additional tests were added during structural testing.
+To cover this missing branch, additional tests were added for `num = 0`
+and for a negative input. These tests verify that invalid inputs are
+rejected with an `IllegalArgumentException`.
+
+After adding these tests, the JaCoCo report was as follows:
+
+| Element | Class Coverage | Method Coverage | Line Coverage | Branch Coverage |
+|--------|----------------|-----------------|---------------|----------------|
+| `ValidPerfectSquare` | 100% (1/1) | 100% (1/1) | 100% (15/15) | 100% (10/10) |
 
 ## Mutation Testing
 The report from Pit Test is as below:
 
 | Number of Classes | Line Coverage | Mutation Coverage | Test Strength |
 |-------------------|---------------|-------------------|---------------|
-| 1 | 93% (14/15) | 86% (12/14) | 86% (12/14) |
+| 1                 | 94% (16/17)   | 94% (16/17)       | 94% (16/17)   |
+
 
 Most generated mutants were killed by the tests, indicating that the test
 suite is effective at detecting incorrect behavior.
 
-Some mutants survived. One relates to the defensive input check (`num <= 0`),
-which is outside the problem specification since the input must be positive.
-Another surviving mutant is a boundary change in the condition `square < num`.
-This mutation does not affect observable behavior because the case
-`square == num` is already handled by the preceding condition.
-
-Therefore, no additional tests were added during mutation testing.
+One surviving mutant changes the boundary in the condition square < num. 
+This does not affect observable behavior because the equality case is already 
+handled by the preceding condition if (square == num). Therefore, no additional 
+test was added.

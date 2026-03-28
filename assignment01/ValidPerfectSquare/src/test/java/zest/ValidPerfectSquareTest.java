@@ -56,4 +56,24 @@ public class ValidPerfectSquareTest {
         assertFalse(ValidPerfectSquare.isPerfectSquare(2147483647));
     }
 
+    @Test
+    public void testZeroInput() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidPerfectSquare.isPerfectSquare(0)
+        );
+
+        assertEquals("Input must be positive", exception.getMessage());
+    }
+
+    @Test
+    public void testNegativeInput() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> ValidPerfectSquare.isPerfectSquare(-4)
+        );
+
+        assertEquals("Input must be positive", exception.getMessage());
+    }
+
 }
