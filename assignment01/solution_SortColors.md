@@ -47,28 +47,26 @@ The tests cover the main logic of the algorithm, including:
 
 Line and branch coverage are slightly below 100% because the defensive
 null check (`if (nums == null)`) is not triggered by the tests.
-This case is outside the problem specification, which guarantees
-a valid input array containing only 0, 1, and 2.
 
-Therefore, no additional tests were added during structural testing.
+To cover this missing branch, the additional test `testNullInput` was
+added. This test ensures that null inputs are rejected. After adding it,
+the Jacoco report was as follows:
+
+| Element | Class Coverage | Method Coverage | Line Coverage | Branch Coverage |
+|--------|----------------|-----------------|---------------|-----------------|
+| `SortColors` | 100% (1/1) | 100% (2/2) | 100% (17/17)  | 100% (8/8)      |
 
 ## Mutation Testing
 The report from Pit Test is as below:
 
 | Number of Classes | Line Coverage | Mutation Coverage | Test Strength |
 |-------------------|---------------|-------------------|---------------|
-| 1 | 90% (18/20) | 100% (10/10) | 100% (10/10) |
+| 1                 | 95% (19/20)   | 100% (10/10)      | 100% (10/10)  |
 
 All generated mutants were killed by the tests, resulting in a mutation
 coverage of 100%. This indicates that the test suite is effective at
 detecting incorrect behavior in the implementation.
 
-Line coverage is slightly below 100% because the defensive null check
-
-`if (nums == null)`
-
-is not triggered by the tests. This case is outside the problem
-specification, which guarantees a valid input array containing only
-values 0, 1, and 2.
-
+PIT does not report full line coverage, but since all mutants were killed,
+mutation testing did not reveal any additional weakness in the test suite.
 Therefore, no additional tests were added during mutation testing.
