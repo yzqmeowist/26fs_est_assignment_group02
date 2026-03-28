@@ -5,6 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ReverseIntegerTest {
     @Test
+    public void testZero() {
+        int input = 0;
+        int expected = 0;
+
+        assertEquals(expected, ReverseInteger.reverse(input));
+    }
+
+    @Test
     public void testPositive() {
         int input = 123;
         int expected = 321;
