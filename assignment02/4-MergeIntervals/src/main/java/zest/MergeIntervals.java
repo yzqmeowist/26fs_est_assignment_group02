@@ -8,6 +8,10 @@ public class MergeIntervals {
     public int[][] merge(int[][] intervals) {
         Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
 
+        if (intervals.length == 0) {
+            return new int[][]{};
+        }
+
         List<int[]> result = new ArrayList<>();
         int[] newInterval = intervals[0];
         result.add(newInterval);
