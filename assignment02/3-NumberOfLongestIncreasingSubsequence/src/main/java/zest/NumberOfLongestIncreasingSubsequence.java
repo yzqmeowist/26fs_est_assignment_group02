@@ -49,7 +49,7 @@ public class NumberOfLongestIncreasingSubsequence {
             throw new IllegalArgumentException("nums must not be null");
         }
 
-        if (nums.length == 0) {
+        if (nums.length < 1 || nums.length > 2000) {
             throw new IllegalArgumentException("nums length must be between 1 and 2000");
         }
     }
