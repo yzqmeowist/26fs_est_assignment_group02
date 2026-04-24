@@ -4,11 +4,13 @@ import java.util.Arrays;
 
 public class NumberOfLongestIncreasingSubsequence {
     public int findNumberOfLIS(int[] nums) {
+        validatePreconditions(nums);
+
         int n = nums.length;
         int[] lengths = new int[n];
         int[] counts = new int[n];
-        Arrays.fill(lengths, 0);
-        Arrays.fill(counts, 0);
+        Arrays.fill(lengths, 1);
+        Arrays.fill(counts, 1);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < i; j++) {
@@ -37,6 +39,28 @@ public class NumberOfLongestIncreasingSubsequence {
             }
         }
 
+        validatePostconditions(result, nums.length);
+
         return result;
+    }
+
+    private void validatePreconditions(int[] nums) {
+        if  (nums == null) {
+            throw new IllegalArgumentException("nums must not be null");
+        }
+        if (nums.length < 1 || nums.length > 2000) {
+            throw new IllegalArgumentException("nums length must be between 1 and 2000");
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < -1000000 || nums[i] > 1000000) {
+                throw new IllegalArgumentException("nums elements must be between -1000000 and 1000000");
+            }
+        }
+    }
+
+    private void validatePostconditions(int result, int numsLength) {
+        if (result < 1 || result > numsLength) {
+            throw new IllegalStateException("result must be between 1 and " + numsLength);
+        }
     }
 }
