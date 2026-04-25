@@ -45,7 +45,7 @@ public class NumberOfLongestIncreasingSubsequence {
     }
 
     private void validatePreconditions(int[] nums) {
-        if  (nums == null) {
+        if (nums == null) {
             throw new IllegalArgumentException("nums must not be null");
         }
         if (nums.length < 1 || nums.length > 2000) {
