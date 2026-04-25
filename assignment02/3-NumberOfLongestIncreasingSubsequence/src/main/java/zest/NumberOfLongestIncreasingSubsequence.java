@@ -48,15 +48,19 @@ public class NumberOfLongestIncreasingSubsequence {
         if (nums == null) {
             throw new IllegalArgumentException("nums must not be null");
         }
-
         if (nums.length < 1 || nums.length > 2000) {
             throw new IllegalArgumentException("nums length must be between 1 and 2000");
         }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < -1000000 || nums[i] > 1000000) {
+                throw new IllegalArgumentException("nums elements must be between -1000000 and 1000000");
+            }
+        }
     }
 
-    private void validatePostconditions(int result, int length) {
-        if (result < 1 || result > length) {
-            throw new IllegalArgumentException("result must be between 1 and nums.length");
+    private void validatePostconditions(int result, int numsLength) {
+        if (result < 1 || result > numsLength) {
+            throw new IllegalStateException("result must be between 1 and " + numsLength);
         }
     }
 }
