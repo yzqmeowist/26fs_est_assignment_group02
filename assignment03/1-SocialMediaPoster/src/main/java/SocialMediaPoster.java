@@ -34,7 +34,31 @@ public class SocialMediaPoster {
      * @return number of successful posts
      */
     public int postBatch(List<String> platforms, String content) {
-        // TODO: Implement using TDD
-        throw new UnsupportedOperationException("Not yet implemented - implement using TDD");
+        if (platforms == null || platforms.isEmpty()) {
+            throw new IllegalArgumentException("Platforms cannot be null or empty");
+        }
+        for (String platform : platforms) {
+            if (platform == null || platform.trim().isEmpty()) {
+                throw new IllegalArgumentException("Platform cannot be null or empty");
+            }
+        }
+        if (content == null || content.trim().isEmpty()) {
+            throw new IllegalArgumentException("Content cannot be null or empty");
+        }
+        if (content.length() > 280) {
+            throw new IllegalArgumentException("Content exceeds maximum length of 280 characters");
+        }
+
+        int limit = api.getRateLimitRemaining();
+        int numberOfPosts = Math.min(platforms.size(), limit);
+        int successes = 0;
+
+        for (int i = 0; i < numberOfPosts; i++) {
+            if (api.post(platforms.get(i), content)) {
+                successes++;
+            }
+        }
+
+        return successes;
     }
 }
