@@ -18,21 +18,6 @@ delegates directly to `api.post()`. If the implementation later changes internal
 fail even if the externally visible behavior is still correct.
 
 
-### Jacoco
-After running JaCoCo, the branches in `postContent` were fully covered. The specification-based
-tests already covered the validation branches for null, empty, blank, length 280, length 281, and successful/failed 
-API responses.
-
-The remaining missed lines/methods come from `postBatch`, which is not implemented yet and will
-be developed separately using TDD in Part B.
-
-#### Report
-| Element | Instruction Coverage | Branch Coverage | Missed Complexity | Total Complexity | Missed Lines | Total Lines | Missed Methods | Total Methods | Missed Classes | Total Classes |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `default` package | 71% | 100% | 4 | 11 | 5 | 15 | 4 | 6 | 1 | 2 |
-| **Total** | **71%** | **100%** | **4** | **11** | **5** | **15** | **4** | **6** | **1** | **2** |
-
-
 ## B
 ### TDD
 #### TDD Step 1: Invalid platform list
@@ -133,18 +118,6 @@ Test written: `postBatchAcceptsContentWithExactly280Characters`
 Expected behavior: Content with exactly 280 characters is valid and should be posted.
 
 Code change: No code change was needed because the existing check only rejects content longer than 280 characters.
-
-### Jacoco
-After completing the TDD steps for `postBatch`, JaCoCo reported 91% instruction coverage and 100% branch coverage. 
-The remaining missed lines/methods are not part of the tested production logic of `SocialMediaPoster`, or belong to 
-simple API simulation code.
-
-#### Report
-| Element | Instruction Coverage | Branch Coverage | Missed Complexity | Total Complexity | Missed Lines | Total Lines | Missed Methods | Total Methods | Missed Classes | Total Classes |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `default` package | 91% | 100% | 3 | 21 | 4 | 31 | 3 | 6 | 1 | 2 |
-| **Total** | **91%** | **100%** | **3** | **21** | **4** | **31** | **3** | **6** | **1** | **2** |
-
 
 ### Questions
 
