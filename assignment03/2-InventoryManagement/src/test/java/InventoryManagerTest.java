@@ -17,7 +17,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getLowStockProductsReturnsEmptyListWhenThereAreNoProducts() {
+    void returnsEmptyWhenNoProducts() {
         when(databaseConnector.getAllProducts()).thenReturn(List.of());
 
         List<Product> result = inventoryManager.getLowStockProducts();
@@ -28,7 +28,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getLowStockProductsReturnsEmptyListWhenNoProductsAreLowStock() {
+    void returnsEmptyWhenNoLowStock() {
         Product product1 = new Product("1", "Keyboard", "Electronics", 10, 50.0);
         Product product2 = new Product("2", "Monitor", "Electronics", 15, 200.0);
 
@@ -42,7 +42,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getLowStockProductsReturnsAllProductsWhenAllProductsAreLowStock() {
+    void returnsAllWhenAllLowStock() {
         Product product1 = new Product("1", "Mouse", "Electronics", 3, 20.0);
         Product product2 = new Product("2", "USB Cable", "Electronics", 9, 5.0);
 
@@ -56,7 +56,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getLowStockProductsReturnsOnlyProductsBelowTen() {
+    void returnsOnlyProductsBelowTen() {
         Product lowStock = new Product("1", "Mouse", "Electronics", 9, 20.0);
         Product exactlyTen = new Product("2", "Keyboard", "Electronics", 10, 50.0);
         Product enoughStock = new Product("3", "Monitor", "Electronics", 11, 200.0);
@@ -73,7 +73,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getLowStockProductsClosesDatabaseWhenGetAllProductsFails() {
+    void closesDatabaseWhenGetAllProductsFails() {
         when(databaseConnector.getAllProducts()).thenThrow(new RuntimeException("Database failure"));
 
         assertThrows(RuntimeException.class,
@@ -83,11 +83,9 @@ class InventoryManagerTest {
         verify(databaseConnector).close();
     }
 
-
-
     // getProductsByCategory
     @Test
-    void getProductsByCategoryRejectsNullCategory() {
+    void rejectsNullCategory() {
         assertThrows(IllegalArgumentException.class,
                 () -> inventoryManager.getProductsByCategory(null));
 
@@ -95,7 +93,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getProductsByCategoryRejectsEmptyCategory() {
+    void rejectsEmptyCategory() {
         assertThrows(IllegalArgumentException.class,
                 () -> inventoryManager.getProductsByCategory(""));
 
@@ -103,7 +101,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getProductsByCategoryRejectsBlankCategory() {
+    void rejectsBlankCategory() {
         assertThrows(IllegalArgumentException.class,
                 () -> inventoryManager.getProductsByCategory("   "));
 
@@ -111,7 +109,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getProductsByCategoryReturnsProductsFromDatabase() {
+    void returnsProductsFromDatabase() {
         Product mouse = new Product("1", "Mouse", "Electronics", 5, 20.0);
 
         when(databaseConnector.getProductsByCategory("Electronics"))
@@ -125,7 +123,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getProductsByCategoryClosesDatabaseWhenQueryFails() {
+    void closesDatabaseWhenQueryFails() {
         when(databaseConnector.getProductsByCategory("Electronics"))
                 .thenThrow(new RuntimeException("Database failure"));
 
@@ -137,7 +135,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getProductsByCategoryReturnsEmptyListWhenDatabaseReturnsNoProducts() {
+    void returnsEmptyWhenDatabaseReturnsNoProducts() {
         when(databaseConnector.getProductsByCategory("Books"))
                 .thenReturn(List.of());
 
@@ -149,7 +147,7 @@ class InventoryManagerTest {
     }
 
     @Test
-    void getProductsByCategoryUsesRequestedCategory() {
+    void usesRequestedCategory() {
         when(databaseConnector.getProductsByCategory("Clothing"))
                 .thenReturn(List.of());
 
