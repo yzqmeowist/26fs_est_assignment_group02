@@ -29,6 +29,10 @@ public class NewsAggregator {
         if (cachedArticles != null && !cachedArticles.isEmpty()) {
             return cachedArticles;
         }
+
+        if (!newsAPI.isAvailable()) {
+            throw new IllegalStateException("News API is unavailable");
+        }
         
         // If not in cache or cache is empty, fetch from API
         List<NewsArticle> freshArticles = newsAPI.fetchNews(category, 10);
