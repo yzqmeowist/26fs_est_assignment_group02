@@ -18,7 +18,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentReturnsTrueWhenApiSucceeds() {
+    void returnsTrueWhenApiSucceeds() {
         when(api.post("Twitter", "Hello")).thenReturn(true);
 
         boolean result = poster.postContent("Twitter", "Hello");
@@ -28,7 +28,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentReturnsFalseWhenApiFails() {
+    void returnsFalseWhenApiFails() {
         when(api.post("Twitter", "Hello")).thenReturn(false);
 
         boolean result = poster.postContent("Twitter", "Hello");
@@ -38,7 +38,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentRejectsNullPlatform() {
+    void rejectsNullPlatform() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postContent(null, "Hello"));
 
@@ -46,7 +46,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentRejectsEmptyPlatform() {
+    void rejectsEmptyPlatform() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postContent("", "Hello"));
 
@@ -54,7 +54,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentRejectsBlankPlatform() {
+    void rejectsBlankPlatform() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postContent("   ", "Hello"));
 
@@ -62,7 +62,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentRejectsNullContent() {
+    void rejectsNullContent() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postContent("Twitter", null));
 
@@ -70,7 +70,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentRejectsEmptyContent() {
+    void rejectsEmptyContent() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postContent("Twitter", ""));
 
@@ -78,7 +78,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentRejectsBlankContent() {
+    void rejectsBlankContent() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postContent("Twitter", "   "));
 
@@ -86,7 +86,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentAcceptsContentWithExactly280Characters() {
+    void acceptsContentWith280Characters() {
         String content = "a".repeat(280);
         when(api.post("Twitter", content)).thenReturn(true);
 
@@ -97,7 +97,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postContentRejectsContentLongerThan280Characters() {
+    void rejectsContentLongerThan280() {
         String content = "a".repeat(281);
 
         assertThrows(IllegalArgumentException.class,
@@ -106,10 +106,9 @@ class SocialMediaPosterTest {
         verifyNoInteractions(api);
     }
 
-
     // postBatch tests
     @Test
-    void postBatchRejectsEmptyPlatformList() {
+    void rejectsEmptyPlatformList() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postBatch(List.of(), "Hello"));
 
@@ -117,7 +116,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchRejectsNullPlatformList() {
+    void rejectsNullPlatformList() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postBatch(null, "Hello"));
 
@@ -125,7 +124,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchRejectsNullContent() {
+    void rejectsNullBatchContent() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postBatch(List.of("Twitter"), null));
 
@@ -133,7 +132,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchRejectsEmptyContent() {
+    void rejectsEmptyBatchContent() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postBatch(List.of("Twitter"), ""));
 
@@ -141,7 +140,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchRejectsBlankContent() {
+    void rejectsBlankBatchContent() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postBatch(List.of("Twitter"), "   "));
 
@@ -149,7 +148,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchRejectsContentLongerThan280Characters() {
+    void rejectsLongBatchContent() {
         String content = "a".repeat(281);
 
         assertThrows(IllegalArgumentException.class,
@@ -159,7 +158,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchReturnsZeroWhenRateLimitIsZero() {
+    void returnsZeroWhenRateLimitIsZero() {
         when(api.getRateLimitRemaining()).thenReturn(0);
 
         int result = poster.postBatch(List.of("Twitter"), "Hello");
@@ -169,7 +168,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchReturnsOneForOneSuccessfulPost() {
+    void returnsOneForSuccessfulPost() {
         when(api.getRateLimitRemaining()).thenReturn(1);
         when(api.post("Twitter", "Hello")).thenReturn(true);
 
@@ -180,7 +179,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchReturnsZeroForOneFailedPost() {
+    void returnsZeroForFailedPost() {
         when(api.getRateLimitRemaining()).thenReturn(1);
         when(api.post("Twitter", "Hello")).thenReturn(false);
 
@@ -191,7 +190,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchCountsOnlySuccessfulPosts() {
+    void countsOnlySuccessfulPosts() {
         when(api.getRateLimitRemaining()).thenReturn(3);
         when(api.post("Twitter", "Hello")).thenReturn(true);
         when(api.post("Facebook", "Hello")).thenReturn(false);
@@ -209,7 +208,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchOnlyPostsUpToRateLimit() {
+    void onlyPostsUpToRateLimit() {
         when(api.getRateLimitRemaining()).thenReturn(2);
         when(api.post("Twitter", "Hello")).thenReturn(true);
         when(api.post("Facebook", "Hello")).thenReturn(true);
@@ -226,7 +225,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchPostsAllPlatformsWhenPlatformCountEqualsRateLimit() {
+    void postsAllWhenCountEqualsLimit() {
         when(api.getRateLimitRemaining()).thenReturn(2);
         when(api.post("Twitter", "Hello")).thenReturn(true);
         when(api.post("Facebook", "Hello")).thenReturn(true);
@@ -239,7 +238,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchPostsAllPlatformsWhenPlatformCountIsBelowRateLimit() {
+    void postsAllWhenCountBelowLimit() {
         when(api.getRateLimitRemaining()).thenReturn(3);
         when(api.post("Twitter", "Hello")).thenReturn(true);
         when(api.post("Facebook", "Hello")).thenReturn(true);
@@ -252,7 +251,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchRejectsNullPlatformInList() {
+    void rejectsNullPlatformInList() {
         List<String> platforms = new ArrayList<>();
         platforms.add("Twitter");
         platforms.add(null);
@@ -264,7 +263,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchRejectsEmptyPlatformInList() {
+    void rejectsEmptyPlatformInList() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postBatch(List.of("Twitter", ""), "Hello"));
 
@@ -272,7 +271,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchRejectsBlankPlatformInList() {
+    void rejectsBlankPlatformInList() {
         assertThrows(IllegalArgumentException.class,
                 () -> poster.postBatch(List.of("Twitter", "   "), "Hello"));
 
@@ -280,7 +279,7 @@ class SocialMediaPosterTest {
     }
 
     @Test
-    void postBatchAcceptsContentWithExactly280Characters() {
+    void acceptsBatchContentWith280Characters() {
         String content = "a".repeat(280);
         when(api.getRateLimitRemaining()).thenReturn(1);
         when(api.post("Twitter", content)).thenReturn(true);
@@ -290,6 +289,4 @@ class SocialMediaPosterTest {
         assertEquals(1, result);
         verify(api).post("Twitter", content);
     }
-
-
 }
