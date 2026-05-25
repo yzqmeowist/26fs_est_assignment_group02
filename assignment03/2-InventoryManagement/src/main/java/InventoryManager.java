@@ -33,7 +33,14 @@ public class InventoryManager {
      * @return list of products in the specified category
      */
     public List<Product> getProductsByCategory(String category) {
-        // TODO: Implement using TDD
-        throw new UnsupportedOperationException("Not yet implemented - implement using TDD");
+        if (category == null || category.trim().isEmpty()) {
+            throw new IllegalArgumentException("Category cannot be null or empty");
+        }
+
+        try {
+            return databaseConnector.getProductsByCategory(category);
+        } finally {
+            databaseConnector.close();
+        }
     }
 }
